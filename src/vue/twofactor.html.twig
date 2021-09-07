@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} Connexion {% endblock %}
+
+
+{% block style %}
+
+{% endblock %}
+
+
+{% block contenu %}
+
+
+<div class="container">
+    <div class="card text-dark bg-white mt-5 border-primary">
+		<div class="card-body">
+
+            <form action="index.php?page=connexion"method="post"enctype="application/x-www-form-urlencoded">
+                <h1>Vérification de connexion</h1>
+
+                <br>
+                
+                <!--
+                <textarea>Un message contenant un code à été envoyé sur votre adresse email "email@domaine.fr".
+                Si il n'apparait pas, veuillez attendre quelques instants.</textarea>
+                -->
+
+                <h6>Un message contenant un code à été envoyé sur votre adresse email "email@domaine.fr".<br>
+                Si il n'apparait pas, veuillez attendre quelques instants.</h6>
+
+                
+
+                <label for="inputPassword" class="sr-only">Mot de passe:</label>
+                <input type="simple" id="inputPassword" name="inputPassword" class="form-control" placeholder="Entrer le code" required>
+
+                <br>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="btConnecter">Confirmer</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

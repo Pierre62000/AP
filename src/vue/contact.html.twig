@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} Contact {% endblock %}
+
+{% block contenu %}
+<br> <br>
+<h2>Informations de contact :</h2>
+<br> <br> 
+<h5>Email : pierre.ritzzo@hotmail.com</h5>
+<h5>Telephone : 01 23 45 67 89</h5>
+
+{% if formC.valideC is defined %}
+    {% if formC.valideC == true %}
+        <h1>Voici votre nom : {{formC.nomC}} {{formC.prenomC}}</h1>
+        <h1>Voici votre identifiant : {{formC.emailC}}</h1>
+        <h1>Voici votre message : {{formC.messageC}}</h1>
+    {% else %}
+        <h1>Erreur. Veuillez réessayer</h1>
+    {% endif %}
+{% else %}
+
+<br>
+
+<h1>TP noté 1</h1>
+
+<form action="index.php?page=contact"method="post"enctype="application/x-www-form-urlencoded">
+    <label for="inputNomC" class="sr-only">Nom:</label>
+    <input type="nomC" id="inputNomC" name="inputNomC" class="form-control" placeholder="Nom" required>
+    <label for="inputEmailC" class="sr-only">Email:</label>
+    <input type="emailC" id="inputEmailC" name="inputEmailC" class="form-control" placeholder="Email" required autofocus>
+    <label for="inputNomC" class="sr-only">Nom:</label>
+    <input type="messageC" id="inputMC" name="inputMC" class="form-control" placeholder="Message" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" name="ContactE">Envoyer</button>
+</form>
+
+{% endif %}
+{% endblock %}

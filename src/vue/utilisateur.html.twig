@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+	Utilisateurs
+{% endblock %}
+{% block contenu %}
+
+	{% if session.role == 1 %}
+
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Email</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Prénom</th>
+						<th scope="col">Rôle</th>
+						<th scope="col"></th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for u in liste %}
+
+						<tr>
+							<td>{{u.email}}</td>
+							<td>{{u.nomUtil}}</td>
+							<td>{{u.prenom}}</td>
+							<td>{{u.libellerole}}</td>
+							<td>
+								<a href="index.php?page=utilisateurmod&id={{u.id}}">Modifier</a>
+							</td>
+							<td>
+								<a href="index.php?page=utilisateurdel&id={{u.id}}">Supprimer (WIP)</a>
+							</td>
+						</tr>
+
+					{% endfor %}
+
+				</tbody>
+			</table>
+		</div>
+	{% endif %}
+	{% if session.role == 0 %}
+		<h1>Vous n'avez pas l'autorisation de voir cette page.</h1>
+	{% endif %}
+
+{% endblock %}

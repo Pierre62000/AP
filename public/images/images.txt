@@ -1,0 +1,2 @@
+Mettre dans ce répertoire les images de votre thème non sensibles.
+Elles seront accessibles par tous les navigateurs sans protection.
