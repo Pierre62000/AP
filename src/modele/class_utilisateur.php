@@ -11,10 +11,11 @@
         
         public function __construct($db){
             $this->db = $db;
-            $this->insert = $this->db->prepare("insert into utilisateur(email, mdp, nomUtil, prenom, idRole)values (:email, :mdp, :nomUtil, :prenom, :role)");
+            $this->insert = $this->db->prepare("insert into utilisateur(email, mdp, nom, prenom, idRole)values (:email, :mdp, :nom, :prenom, :role)");
             $this->delete = $db->prepare("delete from utilisateur where id=:id");
             $this->connect  =  $this->db->prepare("select   email,   idRole,   mdp   from   utilisateur   where   email=:email");
             $this->update  =  $db->prepare("update  utilisateur  set  nomUtil=:nomUtil,  prenom=:prenom,  idRole=:role where id=:id");
+            $this->select = $db->prepare("select u.idUtilisateur, email, idRole, nom, prenom, r.libelle as libellerole from utilisateur u, role r where u.idRole = r.id order by nom");
         }
         
         public function insert($email, $mdp, $role, $nom, $prenom){

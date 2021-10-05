@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+{% block title %}{{ parent() }} Modifier un utilisateur {% endblock %}
+{% block contenu %} 
+<h1>Modifier un utilisateur</h1>
+{% if form.utilisateur is defined %}     
+    {% if form.utilisateur != null %}      
+        <form class="form-signin" action="index.php?page=utilisateurModif" method="post" enctype="application/x-www-form-urlencoded">      
+        <h1 class="h3 mb-3 font-weight-normal">Modifier un utilisateur</h1>      
+        <label for="inputEmail" class="sr-only">Email:</label>      
+        <label for="inputPassword" class="sr-only"> Modifier le mot de passe: </label>      
+        <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Modifier le mot de passe:">      
+        <label for="inputPassword2" class="sr-only">Confirmer le mot de passe à modifier: </label>      
+        <input type="password" id="inputPassword2" name="inputPassword2" class="form-control" placeholder="Confirmation mot de passe">   
+        <label for="email" class="sr-only">email:</label>      
+        <input type="email" id="email" name="email" class="form-control" placeholder="email" value="{{form.utilisateur.email}}">    
+        <label for="nom" class="sr-only">Nom:</label>      
+        <input type="text" id="nom" name="nom" class="form-control" placeholder="Nom" value="{{form.utilisateur.nom}}">      
+        <label for="prenom" class="sr-only">Prénom:</label>      
+        <input type="prenom" id="prenom" name="prenom" class="form-control" placeholder="Prénom" value="{{form.utilisateur.prenom}}">      
+        <select class="form-control" name="role">
+            {% for r in form.roles %}        
+                {% if r.id==form.utilisateur.idRole %}          
+                    <option value="{{ r.id }}" selected>{{ r.libelle }}</option>         
+                {% else %}
+                    <option value="{{ r.id }}">{{ r.libelle }}</option>            
+                {% endif %}        
+            {% endfor %}         
+        </select> 
+        <input type="hidden" name="id" value="{{ form.utilisateur.idUtilisateur}}"/>     
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModifier">Modifier</button>      
+        </form> 
+    {% else %}        
+    <h2 class="alert alert-danger" role="alert">{{ form.message }}</h2>        
+    <a href="index.php?page=utilisateur">Retourner sur la liste des utilisateurs</a>    
+    {% endif %}
+{% else %}      
+    {% if form.valide == true %}         
+    <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>         
+    <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=utilisateur">Retourner sur la liste des utilisateurs</a></h1>     
+    {% else %}          
+    <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>       
+    <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=utilisateur">Retourner sur la liste des utilisateurs</a></h1>    
+    {% endif %}
+{% endif %}     
+{% endblock %}

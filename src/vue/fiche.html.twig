@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+{% block title %}{{ parent() }} Modifier un utilisateur {% endblock %}
+{% block contenu %} 
+<h1>Ajouter la fiche de paie</h1>
+<!--{% if session.role == 2%} -->
+{% if form.utilisateur is defined %} 
+{% if form.etat == true %}       
+        <h1 class="h3 mb-3 font-weight-normal">Suppression réussie</h1>       
+    {% else %}         
+    <h1 class="alert alert-danger" role="alert">Problème d'insertion</h1>     
+    {% endif %}         
+{% endif %}  
+    {% if form.utilisateur != null %}      
+        <form class="form-signin" action="index.php?page=fiche" method="post" enctype="application/x-www-form-urlencoded">      
+        <h1 class="h3 mb-3 font-weight-normal">ajouter une fiche de paie</h1>      
+        <select class="form-control" name="utilisateur">
+            {% for u in form.utilisateurs %}        
+                {% if u.id==form.fiche.idUtilisateur %}          
+                    <option value="{{ u.id }}" selected>{{ u.libelle }}</option>         
+                {% else %}
+                    <option value="{{ u.id }}">{{ u.libelle }}</option>            
+                {% endif %}        
+            {% endfor %}         
+        </select>  
+        <div class="form-group">
+            <label for="fiche">Fiche de paie a deposer</label>
+            <input type="file" class="form-control-file" id="fiche">
+        </div>
+        <input type="hidden" name="id" value="{{form.fiche.id}}"/>     
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="btajouter">Ajouter</button>      
+        </form> 
+    {% else %}        
+    <h2 class="alert alert-danger" role="alert">{{ form.message }}</h2>        
+    <a href="index.php?page=utilisateur">Retourner sur la liste des utilisateurs</a>    
+    {% endif %}
+{% else %}      
+    {% if form.valide == true %}         
+    <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>         
+    <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=utilisateur">Retourner sur la liste des utilisateurs</a></h1>     
+    {% else %}          
+    <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>       
+    <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=utilisateur">Retourner sur la liste des utilisateurs</a></h1>    
+    {% endif %}
+{% endif %}     
+{% endblock %}
