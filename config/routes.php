@@ -2,21 +2,14 @@
 
 function getPage($db){
 
-    $lesPages['commentaire'] = "commentaireControleur";
-    $lesPages['commentairemod'] = "commentaireModifControleur";
-
-
     $lesPages['accueil'] = "accueilControleur";
-    $lesPages['vente'] = "venteControleur";
     $lesPages['inscrire'] = "inscrireControleur";
     $lesPages['contact'] = "contactControleur";
     $lesPages['maintenance'] = "maintenanceControleur";
     $lesPages['connexion'] = "connexionControleur";
     $lesPages['deconnexion'] = "deconnexionControleur";
     $lesPages['utilisateur'] = "utilisateurControleur";
-    $lesPages['type'] = "typeControleur";
     $lesPages['utilisateurmod'] = "utilisateurModifControleur";
-    $lesPages['produitajout'] = "produitAjoutControleur";
     $lesPages['twofactor'] = "twofactorControleur";
 
     
