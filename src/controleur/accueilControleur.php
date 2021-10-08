@@ -35,8 +35,8 @@ function inscrireControleur($twig,$db){
         $inputEmail = $_POST['inputEmail'];
         $inputPassword = $_POST['inputPassword'];
         $inputPassword2 =$_POST['inputPassword2'];
-        $nom = $_POST['inputNom'];
-        $prenom =$_POST['inputPrenom'];
+        $nom = $_POST['nom'];
+        $prenom =$_POST['prenom'];
         $role = $_POST['role'];
         $form['valide'] = true;
         if ($inputPassword!=$inputPassword2){

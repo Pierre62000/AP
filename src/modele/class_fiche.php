@@ -10,7 +10,7 @@
     public function __construct($db){ 
         $this->db = $db; 
         $this->insert = $this->db->prepare("insert into fiche(libelle, idUtilisateur)values (:designation, :utilisateur)");  
-        $this->select = $db->prepare("select f.id, libelle, idUtilisateur from fiche f, utilisateur u where f.idUtilisateur = u.id order by f.id");
+        $this->select = $db->prepare("select f.id, libelle, idUtilisateur from fiche f, Utilisateur u where f.idUtilisateur = u.id order by f.id");
         $this->selectById  =  $db->prepare("select  id, libelle, idUtilisateur from  fiche");
         $this->update  =  $db->prepare("update  fiche  set  libelle=:libelle, idUtilisateur=:utilisateur");
         $this->delete = $db->prepare("delete from fiche");
@@ -25,8 +25,8 @@
         }        
         return $r;    
     }
-    public function select(){        
-        $this->select->execute();        
+    public function select(){  
+        $this->select->execute();       
         if ($this->select->errorCode()!=0){             
             print_r($this->select->errorInfo());          
         }        

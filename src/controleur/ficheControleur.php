@@ -1,14 +1,21 @@
 <?php
 
-function ficheControleur($twig){
-
+function ajoutficheControleur($twig, $db){
+    $form = array();  
+    $utilisateur = new Utilisateur($db);  
+    $fiche = new Fiche($db); 
     if(isset($_POST['btajouter'])){      
         $upload = new Upload(array('pdf'), 'fichier', 50000000);     
         $fiche = $upload->enregistrer('fiche');   
              
-        header('Location: index.php?page=fiche&etat='.$etat);      
-        exit;    
+        echo $twig->render('fiche.html.twig', array('form'=>$form));
     }
+}
+
+function ficheControleur($twig, $db){
+    $form = array();  
+    $fiche = new Fiche($db); 
+
     if(isset($_POST['btSupprimer'])){      
         $cocher = $_POST['cocher'];      
         $form['valide'] = true;      
@@ -23,7 +30,7 @@ function ficheControleur($twig){
         exit;    
     }
     if(isset($_GET['id'])){      
-        $exec=$produit->selectById($_GET['id']);      
+        $exec=$fiche->selectById($_GET['id']);      
         if (!$exec){        
             $etat = false;      
         }else{        
@@ -32,10 +39,13 @@ function ficheControleur($twig){
         header('Location: index.php?page=fiche&etat='.$etat);      
         exit;    
     }    
+
     if(isset($_GET['etat'])){       
             $form['etat'] = $_GET['etat'];     
     }
-    echo $twig->render('fiche.html.twig', array('form'=>$form));
+    $liste = $fiche->select(); 
+    echo $twig->render('utilisateur.html.twig', array('form'=>$form,'liste'=>$liste));
+
 }
 
 
