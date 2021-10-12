@@ -9,22 +9,21 @@
     <div class="card text-dark bg-white mt-5 border-primary">
 		<div class="card-body">
 
-            <form action="index.php?page=connexion"method="post"enctype="application/x-www-form-urlencoded">
+            <form method="post" enctype="application/x-www-form-urlencoded">
                 <h1>Inscription</h1>
 
-                <label for="inputEmail" class="sr-only">Nom :</label>
-                <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Nom" required autofocus>
+                <label for="inputNom" class="sr-only">Nom :</label>
+                <input type="name" id="inputNom" name="inputNom" class="form-control" placeholder="Nom" required autofocus>
 
                 <br>
 
-                <label for="inputEmail" class="sr-only">Prénom :</label>
-                <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Prénom" required autofocus>
+                <label for="inputPrenom" class="sr-only">Prénom :</label>
+                <input type="name" id="inputPrenom" name="inputPrenom" class="form-control" placeholder="Prénom" required>
 
                 <br>
-                
 
                 <label for="inputEmail" class="sr-only">Email :</label>
-                <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required>
 
                 <br>
 
@@ -33,16 +32,16 @@
 
                 <br>
 
-                <label for="inputPassword" class="sr-only">Confirmer le mot de passe :</label>
-                <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Confirmation du mot de passe" required>
+                <label for="inputPassword2" class="sr-only">Confirmer le mot de passe :</label>
+                <input type="password" id="inputPassword2" name="inputPassword2" class="form-control" placeholder="Confirmation du mot de passe" required>
 
                 <br>
 
-                <input type="checkbox" required> J'accepte que les données entrées seront conservées et visible par tout le personnel autorisé.
+                <input type="checkbox" required> J'accepte que les données entrées seront conservées et visible par tout le personnel autorisé.</input>
 
                 <br>
 
-                <button class="btn btn-lg btn-primary btn-block" type="submit" name="btConnecter">S'inscrire</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="btInscrire">S'inscrire</button>
                 <br>
             </form>
         </div>

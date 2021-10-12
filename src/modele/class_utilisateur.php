@@ -11,15 +11,15 @@
         
         public function __construct($db){
             $this->db = $db;
-            $this->insert = $this->db->prepare("insert into utilisateur(email, mdp, nomUtil, prenom, idRole)values (:email, :mdp, :nomUtil, :prenom, :role)");
+            $this->insert = $this->db->prepare("insert into utilisateur(email, mdp, nom, prenom, idRole)values (:email, :mdp, :nom, :prenom, :role)");
             $this->delete = $db->prepare("delete from utilisateur where id=:id");
-            $this->connect  =  $this->db->prepare("select   email,   idRole,   mdp   from   utilisateur   where   email=:email");
-            $this->update  =  $db->prepare("update  utilisateur  set  nomUtil=:nomUtil,  prenom=:prenom,  idRole=:role where id=:id");
+            $this->connect  = $this->db->prepare("select email, idRole, mdp from utilisateur where email=:email");
+            $this->update  = $db->prepare("update  utilisateur  set  nomUtil=:nomUtil,  prenom=:prenom,  idRole=:role where id=:id");
         }
         
-        public function insert($email, $mdp, $role, $nom, $prenom){
+        public function insert($email, $mdp, $nom, $prenom, $role){
             $r = true;
-            $this->insert->execute(array(':email'=>$email, ':mdp'=>$mdp, ':role'=>$role, ':nom'=>$nom,':prenom'=>$prenom));
+            $this->insert->execute(array(':email'=>$email, ':mdp'=>$mdp, ':nom'=>$nom, ':prenom'=>$prenom, ':role'=>$role));
             if ($this->insert->errorCode()!=0){
                 print_r($this->insert->errorInfo());
                 $r=false;
@@ -124,112 +124,4 @@
             return $rC;
         }
     }
-
-    class Commentaire{
-        private $db;
-        private $select;
-        private $selectById;
-        private $update;
-        private $insert;
-
-        public function __construct($db){
-            $this->db = $db;
-            $this->select = $this->db->prepare("select u.id, c.id, u.nomUtil, p.nomProd, c.message from commentaire c, utilisateur u, produit p where c.idUtilisateur = u.id AND c.idProduit = p.id order by u.nomUtil");   
-            $this->selectById = $this->db->prepare("select c.id, u.nomUtil, p.nomProd, c.message from utilisateur u, commentaire c, produit p where c.idUtilisateur = u.id AND c.idProduit = p.id AND c.id=:id");
-            $this->update  =  $db->prepare("update  commentaire  set  message=:message where id=:id");
-        }
-
-
-        public function select(){
-            $this->select->execute();
-            if ($this->select->errorCode()!=0){
-                print_r($this->select->errorInfo());
-            }
-            return $this->select->fetchAll();
-        }
-
-        public function selectById($id){
-        
-            $this->selectById->execute(array(':id'=>$id));
-            if ($this->selectById->errorCode()!=0){
-                print_r($this->selectById->errorInfo());
-            }
-            return $this->selectById->fetch();
-        }
-
-        public function insert($message){
-            $r = true;
-            $this->insert->execute(array(':message'=>$message));
-            if ($this->insert->errorCode()!=0){
-                print_r($this->insert->errorInfo());
-                $r=false;
-            }
-            return $r;
-        }
-
-        public function update($id, $message){
-            $r = true;
-            $this->update->execute(array(':id'=>$id, ':message'=>$message));
-            if ($this->update->errorCode()!=0){
-                print_r($this->update->errorInfo());
-                $r=false;
-            }
-            return $r;
-        }
-    }
-
-    class Produit{
-        private $db;
-        private $select;
-        private $selectById;
-        private $update;
-        private $insert;
-
-        public function __construct($db){
-            $this->db = $db;
-            $this->select = $this->db->prepare("select u.id, c.id, u.nomUtil, p.nomProd, c.message from commentaire c, utilisateur u, produit p where c.idUtilisateur = u.id AND c.idProduit = p.id order by u.nomUtil");   
-            $this->selectById = $this->db->prepare("select c.id, u.nomUtil, p.nomProd, c.message from utilisateur u, commentaire c, produit p where c.idUtilisateur = u.id AND c.idProduit = p.id AND c.id=:id");
-            $this->update  =  $db->prepare("update  produit  set  photo=:photo where id=:id");
-        }
-
-
-        public function select(){
-            $this->select->execute();
-            if ($this->select->errorCode()!=0){
-                print_r($this->select->errorInfo());
-            }
-            return $this->select->fetchAll();
-        }
-
-        public function selectById($id){
-        
-            $this->selectById->execute(array(':id'=>$id));
-            if ($this->selectById->errorCode()!=0){
-                print_r($this->selectById->errorInfo());
-            }
-            return $this->selectById->fetch();
-        }
-
-        public function insert($photo){
-            $r = true;
-            $this->insert->execute(array(':photo'=>$photo));
-            if ($this->insert->errorCode()!=0){
-                print_r($this->insert->errorInfo());
-                $r=false;
-            }
-            return $r;
-        }
-
-        public function update($id, $photo){
-            $r = true;
-            $this->update->execute(array(':id'=>$id, ':photo'=>$photo));
-            if ($this->update->errorCode()!=0){
-                print_r($this->update->errorInfo());
-                $r=false;
-            }
-            return $r;
-        }
-    }
-
-    
 ?>
