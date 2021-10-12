@@ -42,7 +42,7 @@
 			</table>
 		</div>
 	{% endif %}
-	{% if session.role == 0 %}
+	{% if session.role != 1 % }
 		<h1>Vous n'avez pas l'autorisation de voir cette page.</h1>
 	{% endif %}
 

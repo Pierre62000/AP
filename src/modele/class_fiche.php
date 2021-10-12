@@ -9,16 +9,16 @@
 
     public function __construct($db){ 
         $this->db = $db; 
-        $this->insert = $this->db->prepare("insert into fiche(libelle, idUtilisateur)values (:designation, :utilisateur)");  
-        $this->select = $db->prepare("select f.id, libelle, idUtilisateur from fiche f, Utilisateur u where f.idUtilisateur = u.id order by f.id");
-        $this->selectById  =  $db->prepare("select  id, libelle, idUtilisateur from  fiche");
-        $this->update  =  $db->prepare("update  fiche  set  libelle=:libelle, idUtilisateur=:utilisateur");
+        $this->insert = $this->db->prepare("insert into fiche(nom, libelle, idUtilisateur)values (:nom, :designation, :utilisateur)");  
+        $this->select = $db->prepare("select f.id, f.nom, libelle, idUtilisateur from fiche f, Utilisateur u where f.idUtilisateur = u.id order by f.id");
+        $this->selectById  =  $db->prepare("select  id, nom, libelle, idUtilisateur from  fiche");
+        $this->update  =  $db->prepare("update  fiche  set nom=:nom,  libelle=:libelle, idUtilisateur=:utilisateur");
         $this->delete = $db->prepare("delete from fiche");
     }
 
-    public function insert($design, $util){        
+    public function insert($nom, $design, $util){        
         $r = true;        
-        $this->insert->execute(array(':libelle'=>$design, ':utilisateur'=>$util));        
+        $this->insert->execute(array(':nom'=>$nom, ':designation'=>$design, ':utilisateur'=>$util));        
         if ($this->insert->errorCode()!=0){             
             print_r($this->insert->errorInfo());               
             $r=false;        
@@ -39,9 +39,9 @@
         }        
         return $this->selectById->fetch(); 
     }
-    public function update($id, $util, $libelle){        
+    public function update($id, $util, $libelle, $nom){        
         $r = true;        
-        $this->update->execute(array(':id'=>$id, ':utilisateur'=>$util, ':libelle'=>$libelle));        
+        $this->update->execute(array(':id'=>$id, ':utilisateur'=>$util, ':libelle'=>$libelle, ':nom'=>$nom));        
         if ($this->update->errorCode()!=0){             
             print_r($this->update->errorInfo());               
             $r=false;       
