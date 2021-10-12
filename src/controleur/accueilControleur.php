@@ -1,6 +1,14 @@
 <?php
 
-function accueilControleur($twig){
+function accueilControleur($twig,$db){
+
+    if(isset($_SESSION['login'])) {
+        $utilisateur = new Utilisateur($db);
+        $unUtilisateur = $utilisateur->findID($_SESSION['login']);
+        $form['UID']=$unUtilisateur['UID'];
+        $form['idRole']=$unUtilisateur['RID'];
+    }
+
     echo $twig->render('accueil.html.twig', array());
 }
 

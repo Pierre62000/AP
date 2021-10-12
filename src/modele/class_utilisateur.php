@@ -8,13 +8,15 @@
         private $selectById;
         private $delete;
         private $update;
+        private $findID;
         
         public function __construct($db){
             $this->db = $db;
             $this->insert = $this->db->prepare("insert into utilisateur(email, mdp, nom, prenom, idRole)values (:email, :mdp, :nom, :prenom, :role)");
             $this->delete = $db->prepare("delete from utilisateur where id=:id");
             $this->connect  = $this->db->prepare("select email, idRole, mdp from utilisateur where email=:email");
-            $this->update  = $db->prepare("update  utilisateur  set  nomUtil=:nomUtil,  prenom=:prenom,  idRole=:role where id=:id");
+            $this->update  = $db->prepare("update  utilisateur  set  nom=:nom,  prenom=:prenom,  idRole=:role where id=:id");
+            $this->findID = $this->db->prepare("SELECT u.id as UID, email, nom, prenom, idRole as RID, r.libelle as libelle, dateEmbauche from utilisateur u, roles r where email=:email");
         }
         
         public function insert($email, $mdp, $nom, $prenom, $role){
@@ -71,6 +73,14 @@
                 $r=false;
             }
             return $r;
+        }
+
+        public function findID($email){
+            $this->findID->execute(array(':email'=>$email));
+            if ($this->findID->errorCode()!=0){
+                print_r($this->findID->errorInfo());
+            }
+            return $this->findID->fetch();
         }
     }
 
