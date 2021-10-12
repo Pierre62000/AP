@@ -6,7 +6,7 @@
 {% endblock %}
 {% block contenu %}
 
-	{% if session.role == 1 %}
+	
 
 		<div class="table-responsive">
 			<table class="table">
@@ -29,10 +29,13 @@
 							<td>{{u.prenom}}</td>
 							<td>{{u.libellerole}}</td>
 							<td>
-								<a href="index.php?page=utilisateurmod&id={{u.id}}">Modifier</a>
+								<a href="index.php?page=utilisateurmod&id={{u.id}}" style="color:red">Modifier fiche de paie</a>
 							</td>
 							<td>
-								<a href="index.php?page=utilisateurdel&id={{u.id}}">Supprimer (WIP)</a>
+								<a href="index.php?page=utilisateurmod&id={{u.id}}" style="color:green">Modifier</a>
+							</td>
+							<td>
+								<a href="index.php?page=utilisateurdel&id={{u.id}}" style="color:green">Supprimer</a>
 							</td>
 						</tr>
 
@@ -41,9 +44,6 @@
 				</tbody>
 			</table>
 		</div>
-	{% endif %}
-	{% if session.role == 0 %}
-		<h1>Vous n'avez pas l'autorisation de voir cette page.</h1>
-	{% endif %}
+	
 
 {% endblock %}

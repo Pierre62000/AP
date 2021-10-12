@@ -2,24 +2,18 @@
 
 function getPage($db){
 
-    $lesPages['commentaire'] = "commentaireControleur";
-    $lesPages['commentairemod'] = "commentaireModifControleur";
-
-
     $lesPages['accueil'] = "accueilControleur";
-    $lesPages['vente'] = "venteControleur";
     $lesPages['inscrire'] = "inscrireControleur";
     $lesPages['contact'] = "contactControleur";
     $lesPages['maintenance'] = "maintenanceControleur";
     $lesPages['connexion'] = "connexionControleur";
     $lesPages['deconnexion'] = "deconnexionControleur";
     $lesPages['utilisateur'] = "utilisateurControleur";
-    $lesPages['type'] = "typeControleur";
+    $lesPages['profil'] = "profilControleur";
     $lesPages['utilisateurmod'] = "utilisateurModifControleur";
-    $lesPages['produitajout'] = "produitAjoutControleur";
     $lesPages['twofactor'] = "twofactorControleur";
 
-    
+
     if ($db!=null){
         if (isset($_GET['page'])){
             $page = $_GET['page'];
@@ -31,7 +25,7 @@ function getPage($db){
             $contenu = $lesPages[$page];
         }
         else{
-            $contenu = $lesPages['connexion'];
+            $contenu = $lesPages['accueil'];
         }
         return $contenu;
     }
@@ -39,5 +33,5 @@ function getPage($db){
         $contenu = $lesPages['maintenance'];
     }
 }
-    
+
 ?>

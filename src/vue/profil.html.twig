@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+{% block title %} Profil - {{ parent() }} {% endblock %}
+
+{% block contenu %}
+<br>
+
+<div class="container">
+    <div class="card text-dark bg-white mt-5 border-primary">
+        <div class="card-header">
+            <h3>Informations d'utilisateur</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm" style="color:red">
+                    <p>Nom : Nom</p>
+                </div>
+                <div class="col-sm" style="color:red">
+                    <p>Prénom : Prénom</p>
+                </div>
+            </div>
+            <div class="row">
+				<div class="col-sm" style="color:red">
+                    <p>Email : email@hotmail.com</p>
+                </div>
+                <div class="col-sm">
+                    <p>Date d'embauche : 00 Janvier 2000</p>
+                </div>
+            </div>
+			<div class="row">
+                <div class="col-sm">
+                    <p> Profession : Directeur / Comptable / Développeur / etc...</p>
+                </div>
+            </div>
+			<button type="button" class="btn btn-primary">Modifier les informations</button>
+		</div>
+    </div>
+</div>
+{% endblock %}
