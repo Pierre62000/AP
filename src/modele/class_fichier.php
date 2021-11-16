@@ -1,5 +1,5 @@
 <?php
-    class Fiche{
+    class Fichier{
     private $db;  
     private $insert; 
     private $select; 
@@ -9,16 +9,16 @@
 
     public function __construct($db){ 
         $this->db = $db; 
-        $this->insert = $this->db->prepare("insert into fichedePaie(nom, nbrHeure, salaire, tauxSalaire)values (:nom, :nbrH, :salaire, :tauxS)");  
-        $this->select = $db->prepare("select f.id, nbrHeure, salaire, tauxSalaire  from fichedePaie f order by f.id");
-        $this->selectById  =  $db->prepare("select  id, nbrHeure, salaire, tauxSalaire from  fichedePaie");
-        $this->update  =  $db->prepare("update  fichedePaie  set nbrHeure=:nbrH,  salaire=:salaire, tauxSalaire=:tauxSalaire");
-        $this->delete = $db->prepare("delete from fichedePaie");
+        $this->insert = $this->db->prepare("insert into fichier(nom, libelle, idUtilisateur)values (:nom, :designation, :utilisateur)");  
+        $this->select = $db->prepare("select f.id, f.nom, libelle, idUtilisateur from fichier f, Utilisateur u where f.idUtilisateur = u.id order by f.id");
+        $this->selectById  =  $db->prepare("select  id, nom, libelle, idUtilisateur from  fichier");
+        $this->update  =  $db->prepare("update  fichier  set nom=:nom,  libelle=:libelle, idUtilisateur=:utilisateur");
+        $this->delete = $db->prepare("delete from fichier");
     }
 
-    public function insert($nbrH, $salaire, $tauxSalaire){        
+    public function insert($nom, $design, $util){        
         $r = true;        
-        $this->insert->execute(array(':nbrH'=>$nbrH, ':salaire'=>$salaire, ':tauxSalaire'=>$tauxSalaire));        
+        $this->insert->execute(array(':nom'=>$nom, ':designation'=>$design, ':utilisateur'=>$util));        
         if ($this->insert->errorCode()!=0){             
             print_r($this->insert->errorInfo());               
             $r=false;        
@@ -39,9 +39,9 @@
         }        
         return $this->selectById->fetch(); 
     }
-    public function update($id, $nbrH, $salaire, $tauxSalaire){        
+    public function update($id, $util, $libelle, $nom){        
         $r = true;        
-        $this->update->execute(array(':id'=>$id,':nbrH'=>$nbrH, ':salaire'=>$salaire, ':tauxSalaire'=>$tauxSalaire));        
+        $this->update->execute(array(':id'=>$id, ':utilisateur'=>$util, ':libelle'=>$libelle, ':nom'=>$nom));        
         if ($this->update->errorCode()!=0){             
             print_r($this->update->errorInfo());               
             $r=false;       

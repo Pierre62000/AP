@@ -15,7 +15,7 @@
             $this->delete = $db->prepare("delete from Utilisateur where id=:id");
             $this->connect  =  $this->db->prepare("select   email,   idRole,   mdp   from   Utilisateur   where   email=:email");
             $this->update  =  $db->prepare("update  Utilisateur  set  nomUtil=:nomUtil,  prenom=:prenom,  idRole=:role where id=:id");
-            $this->select = $db->prepare("select u.idUtilisateur, email, idRole, nom, prenom, r.libelle as libellerole from Utilisateur u, role r where u.idRole = r.id order by nom");
+            $this->select = $db->prepare("select u.id, email, idRole, nom, prenom, r.libelle as libellerole from Utilisateur u, role r where u.idRole = r.id order by nom");
         }
         
         public function insert($email, $mdp, $role, $nom, $prenom){

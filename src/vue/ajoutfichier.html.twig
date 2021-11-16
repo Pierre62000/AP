@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+{% block title %}{{ parent() }} Ajouter une fiche de paie a un utilisateur {% endblock %}
+{% block contenu %} 
+
+{% if form.valide is defined %}          
+    {% if form.valide == true %} v
+        <h1>La fiche est rajoute pour : {{form.utilisateur.nom}}</h1>            
+    {% else %} 
+        <h1>Echec de l'inscription</h1>        
+        <h1>Erreur : {{form.message}}</h1>       
+        <h1><a href="index.php?page=fiche">Retourner sur la liste des fiche</a></h1>    
+    {% endif %}     
+{% else %}
+    <form class="form-signin" action="index.php?page=fichier" method="post" enctype="multipart/form-data">      
+        <h1>Ajouter une fiche de paie</h1> 
+        <h3>Pour L'employé: </h3>
+        <select class="form-control" name="utilisateur">                  
+            {% for u in liste %}        
+                {% if u.id ==  form.fiche.idUtilisateur %}           
+                    <option value="{{ u.id }}" selected>{{ u.nom }} {{ u.prenom }}</option>         
+                {% else %}
+                    <option value="{{ u.id }}">{{ u.nom }} {{ u.prenom }}</option>            
+                {% endif %}        
+            {% endfor %}         
+        </select>
+        <br>
+        <div class="form-group">
+            <label for="fiche">Fiche de paie a deposer</label>
+            <input type="file" class="form-control-file" id="fiche">
+        </div>        
+    
+        <h1><a href="index.php?page=ajoutfiche">Généré une fiche de paie en PDF</a></h1>
+    <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="btajouter">Ajouter</button>      
+    </form> 
+{% endif %}     
+{% endblock %}

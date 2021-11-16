@@ -1,5 +1,5 @@
 <?php
-    class Fiche{
+    class Taux{
     private $db;  
     private $insert; 
     private $select; 
@@ -9,28 +9,28 @@
 
     public function __construct($db){ 
         $this->db = $db; 
-        $this->insert = $this->db->prepare("insert into fichedePaie(nom, nbrHeure, salaire, tauxSalaire)values (:nom, :nbrH, :salaire, :tauxS)");  
-        $this->select = $db->prepare("select f.id, nbrHeure, salaire, tauxSalaire  from fichedePaie f order by f.id");
-        $this->selectById  =  $db->prepare("select  id, nbrHeure, salaire, tauxSalaire from  fichedePaie");
-        $this->update  =  $db->prepare("update  fichedePaie  set nbrHeure=:nbrH,  salaire=:salaire, tauxSalaire=:tauxSalaire");
-        $this->delete = $db->prepare("delete from fichedePaie");
+        $this->insert = $this->db->prepare("insert into taux(libelle, nbr)values (:designation, :nbr)");  
+        $this->select = $db->prepare("select id, libelle, nbr from taux t order by libelle");
+        $this->selectById  =  $db->prepare("select  id, libelle, nbr from  taux");
+        $this->update  =  $db->prepare("update  taux  set libelle=:libelle, nbr=:nbr");
+        $this->delete = $db->prepare("delete from taux");
     }
 
-    public function insert($nbrH, $salaire, $tauxSalaire){        
+    public function insert($design, $nbr){        
         $r = true;        
-        $this->insert->execute(array(':nbrH'=>$nbrH, ':salaire'=>$salaire, ':tauxSalaire'=>$tauxSalaire));        
+        $this->insert->execute(array(':designation'=>$design, ':nbr'=>$nbr));        
         if ($this->insert->errorCode()!=0){             
             print_r($this->insert->errorInfo());               
             $r=false;        
         }        
         return $r;    
     }
-    public function select(){  
-        $this->select->execute();       
-        if ($this->select->errorCode()!=0){             
-            print_r($this->select->errorInfo());          
-        }        
-        return $this->select->fetchAll();    
+    public function select(){
+        $this->select->execute();
+        if ($this->select->errorCode()!=0){
+            print_r($this->select->errorInfo());
+        }
+        return $this->select->fetchAll();
     }
     public function selectById($id){          
         $this->selectById->execute(array(':id'=>$id));        
@@ -39,9 +39,9 @@
         }        
         return $this->selectById->fetch(); 
     }
-    public function update($id, $nbrH, $salaire, $tauxSalaire){        
+    public function update($id, $libelle, $nbr){        
         $r = true;        
-        $this->update->execute(array(':id'=>$id,':nbrH'=>$nbrH, ':salaire'=>$salaire, ':tauxSalaire'=>$tauxSalaire));        
+        $this->update->execute(array(':id'=>$id, ':libelle'=>$libelle, ':nbr'=>$nbr));        
         if ($this->update->errorCode()!=0){             
             print_r($this->update->errorInfo());               
             $r=false;       

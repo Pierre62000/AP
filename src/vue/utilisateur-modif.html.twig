@@ -2,6 +2,9 @@
 {% block title %}{{ parent() }} Modifier un utilisateur {% endblock %}
 {% block contenu %} 
 <h1>Modifier un utilisateur</h1>
+{% if session.role != 1 % }
+		<h1>Vous n"'" avez pas l"'" autorisation de voir cette page.</h1>
+{% endif %}
 {% if form.utilisateur is defined %}     
     {% if form.utilisateur != null %}      
         <form class="form-signin" action="index.php?page=utilisateurModif" method="post" enctype="application/x-www-form-urlencoded">      

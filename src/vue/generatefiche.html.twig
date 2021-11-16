@@ -1,0 +1,54 @@
+{% extends "base.html.twig" %}
+{% block title %}{{ parent() }} Ajouter une fiche de paie a un utilisateur {% endblock %}
+{% block contenu %} 
+
+{% if form.valide is defined %}          
+    {% if form.valide == true %} 
+        <h1>La fiche peut etre telecharger </h1> 
+        <h1>voici </h1> 
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="btgenerate">Generer</button> 
+        <h1><a href="index.php?page=ajoutfiche">Retourner sur la page precedante si erreur</a></h1> 
+
+    {% else %} 
+        <h1>Echec de l'inscription</h1>        
+        <h1>Erreur : {{form.message}}</h1>       
+        <h1><a href="index.php?page=ajoutfiche">Redemarrer la page</a></h1>    
+    {% endif %}     
+{% else %}
+    <form class="form-signin" action="index.php?page=ajoutfiche" method="post" enctype="multipart/form-data">      
+        <h1>Generer une fiche de paie en PDF</h1> 
+        <form action="index.php?page=contact"method="post"enctype="application/x-www-form-urlencoded">
+            <label for="inputheure" class="sr-only">heurePayée:</label>
+            <input type="heure" id="heure" name="heure" class="form-control" placeholder="nombre d'heure payée" required>
+            <label for="inputEmailC" class="sr-only">taux:</label>
+            <input type="emailC" id="inputEmailC" name="inputEmailC" class="form-control" placeholder="taux" required autofocus>
+            <br>
+            <h1>Cocher la valeur qui null</h1>
+
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Libelle du Taux</th>
+                        <th scope="col">Valeur null</th>  
+					</tr>
+				</thead>
+				<tbody>
+					{% for t in liste %}
+
+						<tr>
+							<td>{{t.libelle}}</td>
+                            <td><input type="checkbox" name="cocher[]" id="cocher[]" value="{{u.id}}" /></td>
+						</tr>
+
+					{% endfor %}
+				</tbody>
+			</table>
+        </div>
+        </form>
+
+                         
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="btgenerate">Generer</button>      
+    </form> 
+{% endif %}     
+{% endblock %}
