@@ -17,7 +17,6 @@
 {% else %}
     <form class="form-signin" action="index.php?page=ajoutfiche" method="post" enctype="multipart/form-data">      
         <h1>Generer une fiche de paie en PDF</h1> 
-        <form action="index.php?page=contact"method="post"enctype="application/x-www-form-urlencoded">
             <label for="inputheure" class="sr-only">heurePayée:</label>
             <input type="heure" id="heure" name="heure" class="form-control" placeholder="nombre d'heure payée" required>
             <label for="inputEmailC" class="sr-only">taux:</label>
@@ -45,7 +44,6 @@
 				</tbody>
 			</table>
         </div>
-        </form>
 
                          
         <button class="btn btn-lg btn-primary btn-block" type="submit" name="btgenerate">Generer</button>      

@@ -10,7 +10,7 @@ function generateficheControleur($twig, $db){
         $unTaux = $taux->selectById($_GET['id']); 
         //$nbr=$id; 
         if ($unTaux!=null){      
-            $form['nbr'] = $unTaux;  
+            $form['taux'] = $unTaux;  
         }else{      
             $form['message'] = 'Taux incorrect';      
         }  
@@ -21,17 +21,16 @@ function generateficheControleur($twig, $db){
         $tauxS = $_POST['taux']; 
         $cocher = $_POST['cocher'];      
         $form['valide'] = true;      
-        $etat = true;      
-        foreach ( $cocher as $id){        
-            $tauxA=1;         
-            if (!$exec){           
-                $etat = true;          
-            }      
-        } 
+        $etat = true;
+              
+        if (in_array("1", !$cocher)) {
+            $MMID = $brut * $untaux / 100; 
+        }
+        
         $brut = $heure * $tauxS; 
-        $MMID = $brut * $untaux / 100;  
+         
         $CCid = $brut * $untaux / 100;
-        $CS   = $brut + '' * $untaux / 100;  
+        $CS   = $brut * 2.2051 * $untaux / 100;  
         $accident = $brut * $untaux / 100;
         $plafonné = $brut * $untaux / 100;
         $deplafonné = $brut * $untaux / 100;
@@ -39,11 +38,11 @@ function generateficheControleur($twig, $db){
         $famille = $brut * $untaux / 100;
         $chomage = $brut * $untaux / 100;
         $contributeur = $brut * $untaux / 100;
-        $forfait = $brut * (8/100) * $untaux / 100;
+        $forfait = $brut * (1.75/100) * $untaux / 100;
         $cotisation = $brut * $untaux / 100;
-        $CSG = $brut * (1.75/100) * $untaux / 100;
+        $CSG = $brut * (99.932/100) * $untaux / 100;
         $exonum = $brut * $untaux / 100;
-        $CRDS = $brut * (1.75/100) * $untaux / 100;
+        $CRDS = $brut * (99.932/100) * $untaux / 100;
         $deduire=$MMID+$CCid+$CS+$accident+$plafonné+$deplafonné+$complémentaire+$famille+$chomage+$contributeur+$forfait+$cotisation+$CSG+$exonum+$CRDS;
         $salaire = $brut-$deduire;
         $pdf = $this->get('knp_snappy.pdf')->getOutputFromHtml($html);

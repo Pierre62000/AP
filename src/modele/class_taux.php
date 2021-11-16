@@ -11,6 +11,7 @@
         $this->db = $db; 
         $this->insert = $this->db->prepare("insert into taux(libelle, nbr)values (:designation, :nbr)");  
         $this->select = $db->prepare("select id, libelle, nbr from taux t order by libelle");
+        $this->default = $db->prepare("select id, nbr from taux t order by nbr");
         $this->selectById  =  $db->prepare("select  id, libelle, nbr from  taux");
         $this->update  =  $db->prepare("update  taux  set libelle=:libelle, nbr=:nbr");
         $this->delete = $db->prepare("delete from taux");
@@ -24,6 +25,13 @@
             $r=false;        
         }        
         return $r;    
+    }
+    public function default(){
+    $this->selectById->execute(array());        
+        if ($this->selectById->errorCode()!=0){             
+            print_r($this->selectById->errorInfo());          
+        }        
+        return $this->selectById->fetch(); 
     }
     public function select(){
         $this->select->execute();
